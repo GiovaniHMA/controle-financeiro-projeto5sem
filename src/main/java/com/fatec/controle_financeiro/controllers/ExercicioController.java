@@ -25,7 +25,6 @@ public class ExercicioController {
         return new StringBuilder(nome).reverse().toString();
     }
  
- 
     @GetMapping("/par-ou-impar/{numero}")
     String verificarParImpar (@PathVariable Integer numero){
         if(numero % 2 == 0){
@@ -34,4 +33,35 @@ public class ExercicioController {
             return "Ímpar";
         }
     }
+
+
+    /*Exercício número 1 sala de aula */
+    @GetMapping("/contar-letras/{texto}")
+    Integer verificarQuantidade(@PathVariable String texto){
+        return texto.length();
+    }
+
+     /*Exercício número 2 sala de aula */
+     @GetMapping("/idade/{idade}")
+     String verificarIdade(@PathVariable Integer idade){
+         if (idade >=1 && idade < 12){
+            return "CRIANCA";
+            }
+            else if (idade >= 12 && idade <= 18){
+                return "ADOLESCENTE";
+            }
+
+            else if (idade >= 18 && idade < 60){
+                return "ADULTO";
+            }
+
+            else if (idade >= 60){
+                return "IDOSO";
+            }
+
+        else {
+            return "IDADE INVÁLIDA";
+        }
+
+     }
 }
