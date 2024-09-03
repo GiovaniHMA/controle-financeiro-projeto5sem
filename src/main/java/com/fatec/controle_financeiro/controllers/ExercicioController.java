@@ -2,6 +2,8 @@ package com.fatec.controle_financeiro.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
  
@@ -62,6 +64,44 @@ public class ExercicioController {
         else {
             return "IDADE INVÁLIDA";
         }
-
      }
+
+
+    @PostMapping("/create-user")
+        public String createUser(@RequestBody User user) {
+            return "Olá, " + user.getNome() + " você tem " + user.getIdade() + " anos";
+    }
+
+    public static class User {
+
+        private String nome;
+        private Integer idade;
+
+        public User(){
+        }
+
+        public User(String nome, Integer idade) {
+            this.nome = nome;
+            this.idade = idade;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+
+        public Integer getIdade() {
+        return idade;
+        }
+
+        public void setIdade(Integer idade) {
+            this.idade = idade;
+        }
+    }
+
 }
+
+    
