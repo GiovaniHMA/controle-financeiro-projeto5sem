@@ -22,6 +22,9 @@ public class UsuarioController {
     //@DeleteMapping -> DELETE - DELETAR
     //@PatchMapping -> PATCH - ANEXAR/ALTERAR
 
+
+    //CRUD = CREATE, READ, UPDATE e DELETE
+
     @PostMapping("/register")
     public ResponseEntity<String> createUser(@Valid @RequestBody User user) {
         if(user.getNome() == null || user.getNome().trim().isEmpty()){
@@ -34,6 +37,9 @@ public class UsuarioController {
 
         return ResponseEntity.ok("Olá, seja bem-vindo! " + user.getNome() + "Você tem " + user.getIdade() + " anos");
     }
+
+
+
 
 
 }
