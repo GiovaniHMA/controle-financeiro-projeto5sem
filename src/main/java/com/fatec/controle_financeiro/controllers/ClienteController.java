@@ -3,6 +3,7 @@ package com.fatec.controle_financeiro.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fatec.controle_financeiro.entities.Cliente;
 
+import com.fatec.controle_financeiro.domain.cliente.ClienteRepository;
+import com.fatec.controle_financeiro.entities.Cliente;
 
     //RestController: Indica que a classe é um controlador que retornará dados diretamente no corpo da resposta.
     @RestController
@@ -22,25 +24,33 @@ import com.fatec.controle_financeiro.entities.Cliente;
     @RequestMapping("/api/cliente")
     public class ClienteController {
     
-        private List<Cliente> clientes = new ArrayList<>();
-        private int proximoId = 1;
+        @Autowired
+        private ClienteRepository clienteRepository;
+        
+        /*private List<Cliente> clientes = new ArrayList<>();
+        private int proximoId = 1;*/
 
         @PostMapping()
         //ResponseEntity: Representar a resposta HTTP, incluindo corpo, status e cabeçalhos.
         public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente){
-            cliente.setId(proximoId++);
+            /*cliente.setId(proximoId++);
             clientes.add(cliente);
 
-            return new ResponseEntity<>(cliente, HttpStatus.CREATED);
+            return new ResponseEntity<>(cliente, HttpStatus.CREATED);*/
+            Cliente clienteCreated = clienteRepository.save(cliente);
+            return new ResponseEntity<>(clienteCreated, HttpStatus.CREATED);
+
         }
 
         @GetMapping()
         public ResponseEntity<List<Cliente>> getAllCliente() {
 
+            List<Cliente> clientes = clienteRepository.findAll();
+
             return new ResponseEntity<>(clientes, HttpStatus.OK);
             
         }
-
+        /*
         @GetMapping("/{id}")
         //PathVariable: Permite capturar valores de variáveis na URL da requisição.
         public ResponseEntity<Cliente> getById(@PathVariable int id) {
@@ -84,7 +94,8 @@ import com.fatec.controle_financeiro.entities.Cliente;
             
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-    }
+    }*/
+
 
 }
 
