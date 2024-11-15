@@ -1,61 +1,48 @@
 package com.fatec.controle_financeiro.entities;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class User {
-
     private int id;
+    
+        @NotBlank(message = "O nome não pode estar em branco.")
+        private String name;
 
+        @NotNull(message = "A idade é obrigatória.")
+        @Min(value = 0, message = "A idade não pode ser negativa.")
+        private int age;
 
-    //Desabilitar quando quiser trabalhar com @Valid
-    //@NotBlank(message = "O nome não pode estar em branco")
-    private String nome;
+        // Construtor padrão
+        public User() {
+        }
 
-    //Desabilitar quando quiser trabalhar com @Valid
-    //@NotBlank(message = "A idade é obrigatória")
-    //@Min(value = 0, message = " A idade não pode ser negativa.")
-    private Integer idade;
+        public User(int id, String name, int age){
+            this.id = id;
+            this.name = name;
+            this.age = age;
+        }
 
-    // Construtor padrão
-    public User() {
+        // Getters e Setters
+        public int getId() { return id; }
 
-    //@NotBlank(message = "O nome não pode estar em branco.")
-    //private String nome;
- 
-    //@NotNull(message = "A idade é obrigatória.")
-    //@Min(value = 0, message = "A idade não pode ser negativa.")
-    //private int idade;
+        public void setId(int id) { this.id = id; }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
     }
-
-    public User(String nome, Integer idade, int id) {
-        this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-        
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-}
